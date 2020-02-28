@@ -1,7 +1,7 @@
-# Introduction
-## MOTIVATION
+# DEEP REINFORCEMENT LEARNING FOR STARCRAFT II
+### MOTIVATION
 Although I will cover the technical aspects of reinforcement learning (RL) as an artificial intelligence technique, I must acknowledge that I was first introduced to the ‘reinforcement learning’ idea when I was learning how to train my dog 15 years ago. This activity eventually became my hobby, and when I found the same idea on the AI literature, I immediately focused my attention on the topic. ‘An agent interacting with the environment by trial/error and getting feedback? my dogs!’ I thought. In addition, it has potential applications  in robotics, healthcare, and education. I also believe that advancing the knowledge in RL is a fundamental task for AI as it is closely related with the concept of general intelligence which involves good decision/action making. For many years, the RL techniques and applications were restricted to small-scale problems. Fortunately, during the last few years deep learning techniques have allowed reinforcement learning to tackle large scale applications including task that are difficult to learn for humans. I had a strong motivation to learn those techniques because I am aware of the importance they will have in future years. Let me drive you through my learning path on deep reinforcement learning, one that shifted my hobby from training dogs to training bots.
-## ABSTRACT
+### ABSTRACT
 This project was built over part of the concepts learnt on the courses Artificial Intelligence, Machine Learning, and Deep Learning:  Reinforcement Learning and Neural Networks. 
 
 John McCarthy, one of the founders of Artificial Intelligence, referred to chess as the “The Drosophila of AI”, which can be understood as: “Games are to Artificial Intelligence what fruit flies are to genetics.” Games allow AI scientists to compare algorithms and set baselines for performance. The AI community continuously implement new learning environments to play those games in computers.  
