@@ -166,7 +166,12 @@ Download the [ladder maps](https://github.com/Blizzard/s2client-proto#downloads)
 and the [mini games](https://github.com/deepmind/pysc2/releases/download/v1.2/mini_games.zip)
 and extract them to your `StarcraftII/Maps/` directory.
 
-### 4. Train it!
+### 4. Try the scripted bots
+```shell
+$ python terran_bot.py
+```
+
+### 5. Train an agent!
 
 ```shell
 $ python train_mineral_shards.py --algorithm=deepq
