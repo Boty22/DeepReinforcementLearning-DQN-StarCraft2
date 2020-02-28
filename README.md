@@ -14,7 +14,7 @@ The initial work in this work used the environment (GridWorld)[ https://github.c
 
 The second part of the project (presented in this repo) updated and added units and features to the repository by (Chris Hoyean)[ https://github.com/chris-chris/pysc2-examples]. Here I  use of deep neural networks architectures as function approximation for reinforcement learning in addition to a buffer replay. The implementation used the open source environment for Starcraft II, developed by Blizzard and Deepmind. I also used the OpenAI baselines, and Tensorflow.
 
-# Part I : Reinforcement Learning
+# PART I: REINFORCEMENT LEARNING
 Reinforcement learning (RL) is the artificial intelligence framework that designs intelligent agents to perform sequential decision making by modeling systems as a Marcov Decision Process (MDP) and finding its solution through interaction with the system. An MDP is defined by a set of states S, a set of actions A, a reward function R(s,a,s’), and optionally a transition function P(s’|s,a). In RL, an MDP defines the interaction between a learning agent and its environment. The goal of an RL agent is to find an optimal policy (mapping from states to actions) which will maximize the expected sum of rewards. In addition, this reward might be delayed or be dependent on the time. Therefore, and early decision might have consequences later. In the search for an optimal policy, the agent has balance between the exploration of new states or the exploitation of what it already knows. 
 
 Now we focus the attention on how to solve the MDP. If we have the model (transition and reward function), we can use Dynamic programing algorithms such as Policy iteration and Value Iteration to find the exact solution. However, they are not considered RL methods because they do not interact with the environment. When no model is provided, we have two options. First, Monte Carlo Methods (MC) that build on the idea of averaging the return of samples of episodes (sequence of states must have initial state and last state). They learn from complete episodes (do not bootstrap). Second, Temporal Difference Learning (TD), which learn (update values) after each action is taken using the difference between the current value and an estimation of a later value. Therefore, TD methods do not need to complete episodes and can bootstrap. Sarsa and Q-learning are TD methods. MC and TD methods are tabular methods because they store the approximation of the value in a table. However, when the state space and action space are too large, we do not only need more memory to store the values but also, we need more data (samples). As huge memory or data  are infeasible, we need generalization from the data available. It is here where the methods used in supervised learning can help because they are successful functions approximation. 
@@ -111,26 +111,26 @@ I can summarize the pysc2 environment with the following picture:
 The most important blocks are Observe and Act. In observe we have two options: the first is to use the RGB input as in Atari, and the second the feature layers. In this project I’m using feature layers. The knowledge of the variables and their semantics ( the meaning of each layer in a tensor) is crucial for debugging purposes. The Act block will allow allow the agent to a selected action. 
 The third step was providing reinforcement learning algorithms to the bots. In this case I trained a dqn.  
  
-# StartCraft II Reinforcement Learning Examples
+# THE CODE
 
 This example program was built on 
-- pysc2 (Deepmind) [https://github.com/deepmind/pysc2]
+- (Deepmind) [https://github.com/deepmind/pysc2]
 - baselines (OpenAI) [https://github.com/openai/baselines]
 - s2client-proto (Blizzard) [https://github.com/Blizzard/s2client-proto]
 - Tensorflow 1.3 (Google) [https://github.com/tensorflow/tensorflow]
 
-# Current examples
+## Current examples
 
-## Minimaps
+### Minimaps
 - CollectMineralShards with Deep Q Network
 
 ![CollectMineralShards](https://media.giphy.com/media/UrgVK9TFfv2AE/giphy.gif "Collect Mineral")
 
-# Quick Start Guide
+## Quick Start Guide
 
-## 1. Get PySC2
+### 1. Get PySC2
 
-### PyPI
+#### PyPI
 
 The easiest way to get PySC2 is to use pip:
 
@@ -144,15 +144,15 @@ Also, you have to install `baselines` library.
 $ pip install git+https://github.com/openai/baselines
 ```
 
-## 2. Install StarCraft II
+### 2. Install StarCraft II
 
-### Mac / Win
+#### Mac / Win
 
 You have to purchase StarCraft II and install it. Or even the Starter Edition will work.
 
 http://us.battle.net/sc2/en/legacy-of-the-void/
 
-### Linux Packages
+#### Linux Packages
 
 Follow Blizzard's [documentation](https://github.com/Blizzard/s2client-proto#downloads) to
 get the linux version. By default, PySC2 expects the game to live in
@@ -160,13 +160,13 @@ get the linux version. By default, PySC2 expects the game to live in
 
 * [3.16.1](http://blzdistsc2-a.akamaihd.net/Linux/SC2.3.16.1.zip)
 
-## 3. Download Maps
+### 3. Download Maps
 
 Download the [ladder maps](https://github.com/Blizzard/s2client-proto#downloads)
 and the [mini games](https://github.com/deepmind/pysc2/releases/download/v1.2/mini_games.zip)
 and extract them to your `StarcraftII/Maps/` directory.
 
-## 4. Train it!
+### 4. Train it!
 
 ```shell
 $ python train_mineral_shards.py --algorithm=deepq
