@@ -32,13 +32,16 @@ _SELECT_ALL = [0]
 
 FLAGS = flags.FLAGS
 
+#PILITA
+FUNCTIONS = actions.FUNCTIONS
+
 class ActWrapper(object):
   def __init__(self, act):
     self._act = act
     #self._act_params = act_params
 
   @staticmethod
-  def load(path, act_params, num_cpu=16):
+  def load(path, act_params, num_cpu=2):
     with open(path, "rb") as f:
       model_data = dill.load(f)
     act = deepq.build_act(**act_params)
@@ -50,7 +53,8 @@ class ActWrapper(object):
         f.write(model_data)
 
       zipfile.ZipFile(arc_path, 'r', zipfile.ZIP_DEFLATED).extractall(td)
-      U.load_state(os.path.join(td, "model"))
+      load_variables(os.path.join(td, "model"))
+      #load_variables(os.path.join(td, "model"))
 
     return ActWrapper(act)
 
@@ -60,7 +64,9 @@ class ActWrapper(object):
   def save(self, path):
     """Save model to a pickle located at `path`"""
     with tempfile.TemporaryDirectory() as td:
-      U.save_state(os.path.join(td, "model"))
+      #dir(U)
+      #PILITA
+      save_variables(os.path.join(td, "model"))
       arc_name = os.path.join(td, "packed.zip")
       with zipfile.ZipFile(arc_name, 'w') as zipf:
         for root, dirs, files in os.walk(td):
@@ -74,7 +80,7 @@ class ActWrapper(object):
       dill.dump((model_data), f)
 
 
-def load(path, act_params, num_cpu=16):
+def load(path, act_params, num_cpu=2):
   """Load act function that was returned by learn function.
 
   Parameters
@@ -113,7 +119,8 @@ def learn(env,
           prioritized_replay_beta0=0.4,
           prioritized_replay_beta_iters=None,
           prioritized_replay_eps=1e-6,
-          num_cpu=16,
+          #PILITA
+          num_cpu=2,
           param_noise=False,
           param_noise_threshold=0.05,
           callback=None):
@@ -190,7 +197,7 @@ def learn(env,
   sess.__enter__()
 
   def make_obs_ph(name):
-    return U.BatchInput((16, 16), name=name)
+    return BatchInput((16, 16), name=name)
 
   act_x, train_x, update_target_x, debug_x = deepq.build_train(
     make_obs_ph=make_obs_ph,
@@ -199,7 +206,7 @@ def learn(env,
     optimizer=tf.train.AdamOptimizer(learning_rate=lr),
     gamma=gamma,
     grad_norm_clipping=10,
-    scope="deepq_x"
+    scope = "deepq_x"
   )
 
   act_y, train_y, update_target_y, debug_y = deepq.build_train(
@@ -209,7 +216,7 @@ def learn(env,
     optimizer=tf.train.AdamOptimizer(learning_rate=lr),
     gamma=gamma,
     grad_norm_clipping=10,
-    scope="deepq_y"
+    scope = "deepq_y" 
   )
 
   act_params = {
@@ -253,9 +260,10 @@ def learn(env,
 
   obs = env.reset()
   # Select all marines first
+  #print('Obs 1:',obs)
   obs = env.step(actions=[sc2_actions.FunctionCall(_SELECT_ARMY, [_SELECT_ALL])])
-
-  player_relative = obs[0].observation["screen"][_PLAYER_RELATIVE]
+  #print('Obs 2:',obs)
+  player_relative = obs[0].observation["feature_screen"][_PLAYER_RELATIVE]
 
   screen = (player_relative == _PLAYER_NEUTRAL).astype(int) #+ path_memory
 
@@ -313,12 +321,28 @@ def learn(env,
 
       obs = env.step(actions=new_action)
 
-      player_relative = obs[0].observation["screen"][_PLAYER_RELATIVE]
+      player_relative = obs[0].observation["feature_screen"][_PLAYER_RELATIVE]
       new_screen = (player_relative == _PLAYER_NEUTRAL).astype(int)
 
       player_y, player_x = (player_relative == _PLAYER_FRIENDLY).nonzero()
-      player = [int(player_x.mean()), int(player_y.mean())]
 
+      # PILITA
+      #print("Test player")
+      #print(player_y, player_x)
+
+      ##Solve the  [] [] case
+      """      xy_error = np.array([])
+      if(player_x == xy_error and player_y == xy_error):
+        print("The agent can't see the marines")
+        print(player_y, player_x)       
+        #player_x = np.array([1])
+        #player_y = np.array([1])
+        player = np.array([1,1])
+      else:
+        player = [int(player_x.mean()), int(player_y.mean())]"""
+
+      player = [int(player_x.mean()), int(player_y.mean())]
+      
       rew = obs[0].reward
 
       done = obs[0].step_type == environment.StepType.LAST
@@ -334,10 +358,23 @@ def learn(env,
 
       if done:
         obs = env.reset()
-        player_relative = obs[0].observation["screen"][_PLAYER_RELATIVE]
+        player_relative = obs[0].observation["feature_screen"][_PLAYER_RELATIVE]
         screent = (player_relative == _PLAYER_NEUTRAL).astype(int)
 
         player_y, player_x = (player_relative == _PLAYER_FRIENDLY).nonzero()
+
+        ##Solve the  [] [] case
+
+        """        xy_error = np.array([])
+        if(player_x == xy_error and player_y == xy_error):
+          print("The agent can't see the marines")
+          print(player_y, player_x)       
+          #player_x = np.array([1])
+          #player_y = np.array([1])
+          player = np.array([1,1])
+        else:
+          player = [int(player_x.mean()), int(player_y.mean())]"""
+
         player = [int(player_x.mean()), int(player_y.mean())]
 
         # Select all marines first
@@ -397,13 +434,14 @@ def learn(env,
           if print_freq is not None:
             logger.log("Saving model due to mean reward increase: {} -> {}".format(
               saved_mean_reward, mean_100ep_reward))
-          U.save_state(model_file)
+          #PILITA
+          save_variables(model_file)
           model_saved = True
           saved_mean_reward = mean_100ep_reward
     if model_saved:
       if print_freq is not None:
         logger.log("Restored model with mean reward: {}".format(saved_mean_reward))
-      U.load_state(model_file)
+      load_variables(model_file)
 
   return ActWrapper(act_x), ActWrapper(act_y)
 
@@ -438,3 +476,94 @@ def shift(direction, number, matrix):
     return matrix
   else:
     return matrix
+
+
+
+
+#PILITA
+
+import tensorflow as tf
+
+class TfInput(object):
+    def __init__(self, name="(unnamed)"):
+        """Generalized Tensorflow placeholder. The main differences are:
+            - possibly uses multiple placeholders internally and returns multiple values
+            - can apply light postprocessing to the value feed to placeholder.
+        """
+        self.name = name
+
+    def get(self):
+        """Return the tf variable(s) representing the possibly postprocessed value
+        of placeholder(s).
+        """
+        raise NotImplemented()
+
+    def make_feed_dict(data):
+        """Given data input it to the placeholder(s)."""
+        raise NotImplemented()
+
+
+class PlaceholderTfInput(TfInput):
+    def __init__(self, placeholder):
+        """Wrapper for regular tensorflow placeholder."""
+        super().__init__(placeholder.name)
+        self._placeholder = placeholder
+
+    def get(self):
+        return self._placeholder
+
+    def make_feed_dict(self, data):
+        return {self._placeholder: data}
+
+class BatchInput(PlaceholderTfInput):
+    def __init__(self, shape, dtype=tf.float32, name=None):
+        """Creates a placeholder for a batch of tensors of a given shape and dtype
+        Parameters
+        ----------
+        shape: [int]
+            shape of a single elemenet of the batch
+        dtype: tf.dtype
+            number representation used for tensor contents
+        name: str
+            name of the underlying placeholder
+        """
+        super().__init__(tf.placeholder(dtype, [None] + list(shape), name=name))
+
+
+#To save variables...
+def save_variables(save_path, variables=None, sess=None):
+    import joblib
+    sess = sess or get_session()
+    variables = variables or tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
+
+    ps = sess.run(variables)
+    save_dict = {v.name: value for v, value in zip(variables, ps)}
+    dirname = os.path.dirname(save_path)
+    if any(dirname):
+        os.makedirs(dirname, exist_ok=True)
+    joblib.dump(save_dict, save_path)
+
+
+def get_session(config=None):
+    """Get default session or create one with a given config"""
+    sess = tf.get_default_session()
+    if sess is None:
+        sess = U.make_session(config=config, make_default=True)
+    return sess
+
+def load_variables(load_path, variables=None, sess=None):
+    import joblib
+    sess = sess or get_session()
+    variables = variables or tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
+
+    loaded_params = joblib.load(os.path.expanduser(load_path))
+    restores = []
+    if isinstance(loaded_params, list):
+        assert len(loaded_params) == len(variables), 'number of variables loaded mismatches len(variables)'
+        for d, v in zip(loaded_params, variables):
+            restores.append(v.assign(d))
+    else:
+        for v in variables:
+            restores.append(v.assign(loaded_params[v.name]))
+
+    sess.run(restores)

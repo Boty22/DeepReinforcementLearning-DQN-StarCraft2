@@ -35,6 +35,10 @@ def main():
       map_name="CollectMineralShards",
       step_mul=step_mul,
       visualize=True,
+      #PILITA
+      agent_interface_format=features.AgentInterfaceFormat(
+              feature_dimensions=features.Dimensions(screen=16, minimap=16)),
+
       game_steps_per_episode=steps * step_mul) as env:
 
     model = deepq.models.cnn_to_mlp(
@@ -43,7 +47,7 @@ def main():
       dueling=True)
 
     def make_obs_ph(name):
-      return U.BatchInput((64, 64), name=name)
+      return BatchInput((64, 64), name=name)
 
     act_params = {
       'make_obs_ph': make_obs_ph,
@@ -67,7 +71,7 @@ def main():
 
       while not done:
 
-        player_relative = step_result[0].observation["screen"][
+        player_relative = step_result[0].observation["feature_screen"][
           _PLAYER_RELATIVE]
 
         obs = player_relative
@@ -90,14 +94,12 @@ def main():
         coord = [player[0], player[1]]
 
         if (action == 0):  #UP
-
           if (player[1] >= 16):
             coord = [player[0], player[1] - 16]
           elif (player[1] > 0):
             coord = [player[0], 0]
 
-        elif (action == 1):  #DOWN
-
+        elif (action == 1):  # DOWN
           if (player[1] <= 47):
             coord = [player[0], player[1] + 16]
           elif (player[1] > 47):
@@ -156,6 +158,60 @@ def shift(direction, number, matrix):
     return matrix
   else:
     return matrix
+#PILITA
+
+import tensorflow as tf
+
+class TfInput(object):
+    def __init__(self, name="(unnamed)"):
+        """Generalized Tensorflow placeholder. The main differences are:
+            - possibly uses multiple placeholders internally and returns multiple values
+            - can apply light postprocessing to the value feed to placeholder.
+        """
+        self.name = name
+
+    def get(self):
+        """Return the tf variable(s) representing the possibly postprocessed value
+        of placeholder(s).
+        """
+        raise NotImplemented()
+
+    def make_feed_dict(data):
+        """Given data input it to the placeholder(s)."""
+        raise NotImplemented()
+
+
+class PlaceholderTfInput(TfInput):
+    def __init__(self, placeholder):
+        """Wrapper for regular tensorflow placeholder."""
+        super().__init__(placeholder.name)
+        self._placeholder = placeholder
+
+    def get(self):
+        return self._placeholder
+
+    def make_feed_dict(self, data):
+        return {self._placeholder: data}
+
+class BatchInput(PlaceholderTfInput):
+    def __init__(self, shape, dtype=tf.float32, name=None):
+        """Creates a placeholder for a batch of tensors of a given shape and dtype
+        Parameters
+        ----------
+        shape: [int]
+            shape of a single elemenet of the batch
+        dtype: tf.dtype
+            number representation used for tensor contents
+        name: str
+            name of the underlying placeholder
+        """
+        super().__init__(tf.placeholder(dtype, [None] + list(shape), name=name))
+
+#To save variables...
+#def save_variables(save_path, variables=None, sess=None):
+
+
+
 
 
 if __name__ == '__main__':

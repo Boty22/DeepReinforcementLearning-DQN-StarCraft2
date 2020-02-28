@@ -1,0 +1,399 @@
+C:\PERSONAL FOLDER\SPRING 2019\DeepRL\pysc2-examples>python train_mineral_shards.py --algorithm=deepq
+C:\Users\LUCIA\Anaconda3\lib\site-packages\h5py\__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+WARNING:tensorflow:From C:\Users\LUCIA\Anaconda3\lib\site-packages\tensorflow\contrib\learn\python\learn\datasets\base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+pygame 1.9.4
+Hello from the pygame community. https://www.pygame.org/contribute.html
+algorithm : deepq
+timesteps : 2000000
+exploration_fraction : 0.5
+prioritized : True
+dueling : True
+num_agents : 4
+lr : 0.0005
+random lr : 0.0005
+2019-04-30 23:52:23.418580: I tensorflow/core/platform/cpu_feature_guard.cc:140] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX
+WARNING:tensorflow:From C:\Users\LUCIA\Anaconda3\lib\site-packages\tensorflow\python\util\deprecation.py:497: calling conv1d (from tensorflow.python.ops.nn_ops) with data_format=NHWC is deprecated and will be removed in a future version.
+Instructions for updating:
+`NHWC` for data_format is deprecated, use `NWC` instead
+W0430 23:52:23.739966 17664 tf_logging.py:126] From C:\Users\LUCIA\Anaconda3\lib\site-packages\tensorflow\python\util\deprecation.py:497: calling conv1d (from tensorflow.python.ops.nn_ops) with data_format=NHWC is deprecated and will be removed in a future version.
+Instructions for updating:
+`NHWC` for data_format is deprecated, use `NWC` instead
+
+
+Obs 1: (TimeStep(step_type=<StepType.FIRST: 0>, reward=0.0, discount=0.0, observation={'single_select': NamedNumpyArray([[0, 0, 0, 0, 0, 0, 0]], [None, ['unit_type', 'player_relative', 'health', 'shields', 'energy', 'transport_slots_taken', 'build_progress']]), 'multi_select': array([], shape=(0, 7), dtype=int32), 'build_queue': array([], shape=(0, 7), dtype=int32), 'cargo': array([], shape=(0, 7), dtype=int32), 'cargo_slots_available': array([0]), 'feature_screen': NamedNumpyArray([[[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 2, 2, ..., 2, 2, 0],
+                  [0, 2, 2, ..., 2, 2, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 ...,
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 1, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 1, 1, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]]], [['height_map', 'visibility_map', 'creep', 'power', 'player_id', '...', 'unit_shields', 'unit_shields_ratio', 'unit_density', 'unit_density_aa', 'effects'], None, None]), 'feature_minimap': NamedNumpyArray([[[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 ...,
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]]], [['height_map', 'visibility_map', 'creep', 'camera', 'player_id', 'player_relative', 'selected'], None, None]), 'last_actions': array([], dtype=int32), 'action_result': array([], dtype=int32), 'alerts': array([], dtype=int32), 'game_loop': array([0]), 'score_cumulative': NamedNumpyArray([  0,   0,   0, 100,   0,   0,   0,   0,   0,   0,   0,
+                   0,   0], ['score', 'idle_production_time', 'idle_worker_time', 'total_value_units', 'total_value_structures', '...', 'collected_vespene', 'collection_rate_minerals', 'collection_rate_vespene', 'spent_minerals', 'spent_vespene']), 'score_by_category': NamedNumpyArray([[  0,   2,   0,   0,   0],
+                 [  0,   0,   0,   0,   0],
+                 [  0,   0,   0,   0,   0],
+                 [  0,   0,   0,   0,   0],
+                 [  0,   0,   0,   0,   0],
+                 [  0,   0,   0,   0,   0],
+                 [  0,   0,   0,   0,   0],
+                 [  0, 100,   0,   0,   0],
+                 [  0,   0,   0,   0,   0],
+                 [  0, 100,   0,   0,   0],
+                 [  0,   0,   0,   0,   0]], [['food_used', 'killed_minerals', 'killed_vespene', 'lost_minerals', 'lost_vespene', 'friendly_fire_minerals', 'friendly_fire_vespene', 'used_minerals', 'used_vespene', 'total_used_minerals', 'total_used_vespene'], ['none', 'army', 'economy', 'technology', 'upgrade']]), 'score_by_vital': NamedNumpyArray([[0, 0, 0],
+                 [0, 0, 0],
+                 [0, 0, 0]], [['total_damage_dealt', 'total_damage_taken', 'total_healed'], ['life', 'shields', 'energy']]), 'player': NamedNumpyArray([1, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0], ['player_id', 'minerals', 'vespene', 'food_used', 'food_cap', 'food_army', 'food_workers', 'idle_worker_count', 'army_count', 'warp_gate_count', 'larva_count']), 'control_groups': array([[0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0]]), 'available_actions': array([0, 1, 2, 3, 4, 7])}),)
+
+
+
+
+Obs 2: (TimeStep(step_type=<StepType.MID: 1>, reward=0, discount=1.0, 
+	
+	observation={
+
+		'single_select': NamedNumpyArray([[0, 0, 0, 0, 0, 0, 0]], [None, ['unit_type', 'player_relative', 'health', 'shields', 'energy', 'transport_slots_taken', 'build_progress']]), 
+		'multi_select': NamedNumpyArray([[48,  1, 45,  0,  0,  0,  0], [48,  1, 45,  0,  0,  0,  0]], [None, ['unit_type', 'player_relative', 'health', 'shields', 'energy', 'transport_slots_taken', 'build_progress']]), 
+		'build_queue': array([], shape=(0, 7), dtype=int32), 
+		'cargo': array([], shape=(0, 7), dtype=int32), 
+		'cargo_slots_available': array([0]), 
+
+		'feature_screen': 
+
+NamedNumpyArray([[[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 2, 2, ..., 2, 2, 0],
+                  [0, 2, 2, ..., 2, 2, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 ...,
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 1, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 1, 1, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]]], 
+[['height_map', 'visibility_map', 'creep', 'power', 'player_id', '...', 'unit_shields', 'unit_shields_ratio', 'unit_density', 'unit_density_aa', 'effects'], None, None]), 
+
+
+
+		'feature_minimap': 
+NamedNumpyArray([[[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 ...,
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]],
+
+                 [[0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  ...,
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0],
+                  [0, 0, 0, ..., 0, 0, 0]]], 
+[['height_map', 'visibility_map', 'creep', 'camera', 'player_id', 'player_relative', 'selected'], None, None]),
+
+ 
+
+		'last_actions': array([7]), 'action_result': array([], dtype=int32), 'alerts': array([], dtype=int32), 'game_loop': array([8]), 
+
+		'score_cumulative': 
+
+NamedNumpyArray([  0,   0,   0, 100,   0,   0,   0,   0,   0,   0,   0, 0,   0], 
+['score', 'idle_production_time', 'idle_worker_time', 'total_value_units', 'total_value_structures', '...', 'collected_vespene', 'collection_rate_minerals', 'collection_rate_vespene', 'spent_minerals', 'spent_vespene']), 
+		
+		'score_by_category': 
+NamedNumpyArray([[  0,   2,   0,   0,   0],
+                 [  0,   0,   0,   0,   0],
+                 [  0,   0,   0,   0,   0],
+                 [  0,   0,   0,   0,   0],
+                 [  0,   0,   0,   0,   0],
+                 [  0,   0,   0,   0,   0],
+                 [  0,   0,   0,   0,   0],
+                 [  0, 100,   0,   0,   0],
+                 [  0,   0,   0,   0,   0],
+                 [  0, 100,   0,   0,   0],
+                 [  0,   0,   0,   0,   0]], [['food_used', 'killed_minerals', 'killed_vespene', 'lost_minerals', 'lost_vespene', 'friendly_fire_minerals', 'friendly_fire_vespene', 'used_minerals', 'used_vespene', 'total_used_minerals', 'total_used_vespene'], ['none', 'army', 'economy', 'technology', 'upgrade']]), 'score_by_vital': NamedNumpyArray([[0, 0, 0],
+                 [0, 0, 0],
+                 [0, 0, 0]], [['total_damage_dealt', 'total_damage_taken', 'total_healed'], ['life', 'shields', 'energy']]), 
+
+		'player': 
+NamedNumpyArray([1, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0], 
+['player_id', 'minerals', 'vespene', 'food_used', 'food_cap', 'food_army', 'food_workers', 'idle_worker_count', 'army_count', 'warp_gate_count', 'larva_count']), 
+
+		'control_groups': 
+array([[0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0]]), 
+
+		'available_actions': array([  0,   1,   2,   3,   4,   5, 453,   7, 331, 332, 333, 334,  12, 13, 274])}),)
+
+
+W0430 23:52:32.215233 17664 sc_process.py:204] Killing the process.
+Traceback (most recent call last):
+  File "train_mineral_shards.py", line 311, in <module>
+    main()
+  File "train_mineral_shards.py", line 136, in main
+    callback=deepq_callback)
+  File "C:\PERSONAL FOLDER\SPRING 2019\DeepRL\pysc2-examples\deepq_mineral_shards.py", line 259, in learn
+    player_relative = obs[0].observation["screen"][_PLAYER_RELATIVE]
+KeyError: 'screen'
+
+C:\PERSONAL FOLDER\SPRING 2019\DeepRL\pysc2-examples>
+
+
+
+>>> dir(U)
+[
+'ALREADY_INITIALIZED', 
+'GetFlat', 
+'SetFromFlat', 
+'_Function', 
+'_PLACEHOLDER_CACHE', 
+'__builtins__', 
+'__cached__', 
+'__doc__', 
+'__file__', 
+'__loader__', 
+'__name__', 
+'__package__', 
+'__spec__', 
+'collections', 
+'conv2d', 
+'copy', 
+'display_var_info', 
+'flatgrad', 
+'flattenallbut0', 
+'function', 
+'functools', 
+'get_placeholder', 
+'get_placeholder_cached', 
+'huber_loss', 'in_session', 
+'initialize', 
+'intprod', 
+'lrelu', 
+'make_session', 
+'multiprocessing', 
+'normc_initializer', 
+'np', 
+'numel', 
+'os', '
+single_threaded_session', 
+'switch', 
+'tf', 
+'var_shape']
+>>>
+
+
+
+[] []
+C:\PERSONAL FOLDER\SPRING 2019\DeepRL\pysc2-examples\deepq_mineral_shards.py:330: RuntimeWarning: Mean of empty slice.
+  player = [int(player_x.mean()), int(player_y.mean())]
+W0501 18:17:08.700696   976 sc_process.py:204] Killing the process.
+Traceback (most recent call last):
+  File "train_mineral_shards.py", line 311, in <module>
+    main()
+  File "train_mineral_shards.py", line 136, in main
+    callback=deepq_callback)
+  File "C:\PERSONAL FOLDER\SPRING 2019\DeepRL\pysc2-examples\deepq_mineral_shards.py", line 330, in learn
+    player = [int(player_x.mean()), int(player_y.mean())]
+ValueError: cannot convert float NaN to integer
+
+
+C:\PERSONAL FOLDER\SPRING 2019\DeepRL\pysc2-examples>python enjoy_mineral_shards.py
+C:\Users\LUCIA\Anaconda3\lib\site-packages\h5py\__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+WARNING:tensorflow:From C:\Users\LUCIA\Anaconda3\lib\site-packages\tensorflow\contrib\learn\python\learn\datasets\base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+pygame 1.9.4
+Hello from the pygame community. https://www.pygame.org/contribute.html
+Traceback (most recent call last):
+  File "enjoy_mineral_shards.py", line 162, in <module>
+    main()
+  File "enjoy_mineral_shards.py", line 38, in main
+    game_steps_per_episode=steps * step_mul) as env:
+  File "C:\Users\LUCIA\Anaconda3\lib\site-packages\pysc2\env\sc2_env.py", line 260, in __init__
+    raise ValueError("Please specify agent_interface_format.")
+ValueError: Please specify agent_interface_format.
+
+C:\PERSONAL FOLDER\SPRING 2019\DeepRL\pysc2-examples>
+
+

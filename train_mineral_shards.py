@@ -5,11 +5,9 @@ from absl import flags
 from baselines import deepq
 from pysc2.env import sc2_env
 from pysc2.lib import actions
-import os
-
+from pysc2.lib import features
 import deepq_mineral_shards
 import datetime
-
 from common.vec_env.subproc_vec_env import SubprocVecEnv
 from a2c.policies import CnnPolicy
 from a2c import a2c
@@ -104,8 +102,11 @@ def main():
         map_name="CollectMineralShards",
         step_mul=step_mul,
         visualize=True,
-        screen_size_px=(16, 16),
-        minimap_size_px=(16, 16)) as env:
+        agent_interface_format=features.AgentInterfaceFormat(
+              feature_dimensions=features.Dimensions(screen=16, minimap=16)),
+        #screen_size_px=(16, 16),
+        #minimap_size_px=(16, 16)
+        ) as env:
 
       model = deepq.models.cnn_to_mlp(
         convs=[(16, 8, 4), (32, 4, 2)], hiddens=[256], dueling=True)
