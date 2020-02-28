@@ -106,6 +106,7 @@ The firs step to tackle the problem was familiarizing with the StarCraftII domai
 The second step was familiarizing with the pysc2 Reinforcement Learning environment. To do so, I created some scripted bots. Using the minimaps and complete ones. Minimaps are maps specially developed for ML experimentation, which will be used later.
 
 I can summarize the pysc2 environment with the following picture:
+
  
 The most important blocks are Observe and Act. In observe we have two options: the first is to use the RGB input as in Atari, and the second the feature layers. In this project I’m using feature layers. The knowledge of the variables and their semantics ( the meaning of each layer in a tensor) is crucial for debugging purposes. The Act block will allow allow the agent to a selected action. 
 The third step was providing reinforcement learning algorithms to the bots. In this case I trained a dqn.  
