@@ -26,65 +26,70 @@ Now we focus the attention on how to solve the MDP. If we have the model (transi
 -	Chapter 6: Temporal-Difference Learning
 -	Chapter 9: On-policy Prediction with Approximation
 -	Chapter 16: Applications and Case Studies
+
 [2] Thomas G. Dietterich and Xin Wang. Batch Value Function Approximation via Support Vectors. Advances in Neural Information Processing Systems 14 (NIPS 2001)
+
 [3] Xin Wang and Thomas G. Dietterich. Efficient Value Function Approximation Using Regression Trees. In Proceedings of the IJCAI Workshop on Statistical Machine Learning for Large-Scale Optimization, 1999
 ### TUTORIALS:
 [4] Deep Reinforcement Learning, Decision Making, and Control. ICML 2017 Tutorial. https://sites.google.com/view/icml17deeprl
 ### OPEN SOURCE:
 [5] Project 3: Reinforcement Learning. http://ai.berkeley.edu/reinforcement.html
 ### PROGRAMS IMPLEMENTED:
-	(1) TD-0 for Grid-World 
-	(2) Sarsa for Grid-World
-	(3) Q-learning algorithms for Grid-World
+(1) TD-0 for Grid-World 
+(2) Sarsa for Grid-World
+(3) Q-learning algorithms for Grid-World
  
 # PART 2: DEEP REINFORCEMENT LEARNING
 The theory available for reinforcement learning had constrained to applications with fully observed, low-dimensional state spaces. Starting 2010, neural networks using the power of computing such as GPUs and data availability as ImageNet, increased their accuracy and ability to manage high-dimensional data. The new set of methods for neural networks were coined under the name of Deep Learning. Reinforcement Learning research had already used neural networks, however those methods had already a high computational cost and were considered inefficient when using large neural large networks6. For example, Neural Fitted Q-iteration (NFQ)7 modified the classical Q-Learning (where the update is performed online in a sample by sample manner) to an off-line version. In an NFQ iteration, a neural network Qk generates a complete set of new samples, then a new neural network Q_(k+1) is trained using those samples, resulting in a fitted Q-Iteration algorithm (special form of experience replay)3 where the regression algorithm uses a neural net. As mentioned before, the high computational cost of training a deep neural network in each iteration would would make its use too inefficient. In addition, a neural network as a function approximation was considered unstable because of the correlation between successive updates and the correlation between current value of the Q and the target. The application of reinforcement learning in rich perceptual domains had to wait a little bit more. 
+
 One of the earliest successful applications of deep learning to reinforcement learning was in the Atari game. The architecture designed was named Deep Q Network (DQN)6 . It used a convolutional neural network of two convolutional layers and two fully connected layers. We can consider DQN as an evolution of NFQ in the sense that it used experience replay to address the correlation between successive updates. However, DQN is online, it samples a random minibatch of transitions from the replay buffer and preforms gradient descent to update the Q network. The use of the reply experience made DQN off-policy. DQN also addressed the correlation between the value and the target by using a separated network (older set of weights) to compute the targets that is updated every x number of iterations; therefore, the target function does not change too quickly. The results of DQN were impressive, it outperformed human payers in 29 of 49 games using the same architecture and hyperparameters. It only had to retrain for a new neural net for each game. Despite the unprecedented success, DQN had some drawbacks: its use of memory and the requirement of off-policy learning. The asynchronous advantage actor-critic (A3C)11 method surpasses these drawbacks by asynchronously executing multiple agents in parallel, on multiple instances of the environment threads of the same CPU. The agents share a model which asynchronously updated in the shared memory, and they might employ different exploration policies. AC3 tis less expensive to train that DQN, but it might be less stable too.  
+
 As dataset such ImageNet allowed the flourishment of techniques for deep neural networks, challenging reinforcement learning environments are allowing the development of new reinforcement learning methods10. Some examples of environment are Atari, Go, Dota and StarCraft II. For this course, we selected the StarCraft II RL environment. StarCraft is a real time strategy game (RTS) considered a highly complex domain. Depending on the map (challenge) we use, the units available and resources, the player decides what actions to take. See the Strategy for the Implementation section or more details.
+
 ### RECOMMENDED READINGS:
-	[6] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Bellemare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, et al. Human-level control through deep reinforcement learning. Nature, 518(7540):529–533, 2015.
-	[7] Martin Riedmiller. Neural Fitted Q Iteration - First Experiences with a Data Efficient Neural Reinforcement Learning Method. Machine Learning: ECML 3720, 317-328 (Springer, 2005)
-	[8] D. Ernst and and L. Wehenkel P. Geurts. Tree-based batch mode reinforcement learning. Journal of Machine Learning Research, 6:503–556, 2005
-	[9] David Silver, Aja Huang, Chris J Maddison, Arthur Guez, Laurent Sifre, George Van Den Driessche, Julian Schrittwieser, Ioannis Antonoglou, Veda Panneershelvam, Marc Lanc- tot, et al. Mastering the game of Go with deep neural networks and tree search. Nature, 529 (7587):484–489, 2016.
-	[10] Vinyals, O., Ewalds, T., Bartunov, S., Georgiev, P., Vezhnevets, A. S., Yeo, M.,  Tsing, R. (2017). StarCraft II: A New Challenge for Reinforcement Learning. https://doi.org/https://deepmind.com/documents/110/sc2le.pdf
-	[11] Mnih, Volodymyr, Kavukcuoglu, Koray, Silver, David, Graves, Alex, Antonoglou, Ioannis, Wierstra, Daan, and Riedmiller, Martin. Playing atari with deep reinforcement learning. In NIPS Deep Learning Workshop. 2013.
-	[12] Volodymyr Mnih, Adrià Puigdomènech Badia, Mehdi Mirza, Alex Graves, Timothy P. Lillicrap, Tim Harley, David Silver, Koray Kavukcuoglu. Asynchronous Methods for Deep Reinforcement Learning. ICML 2016.
-	[13] Basel Alghanem, Keerthana P G. Asynchronous Advantage Actor-Critic Agent for Starcraft II. arXiv:1807.08217
+[6] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Bellemare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, et al. Human-level control through deep reinforcement learning. Nature, 518(7540):529–533, 2015.
+[7] Martin Riedmiller. Neural Fitted Q Iteration - First Experiences with a Data Efficient Neural Reinforcement Learning Method. Machine Learning: ECML 3720, 317-328 (Springer, 2005)
+[8] D. Ernst and and L. Wehenkel P. Geurts. Tree-based batch mode reinforcement learning. Journal of Machine Learning Research, 6:503–556, 2005
+[9] David Silver, Aja Huang, Chris J Maddison, Arthur Guez, Laurent Sifre, George Van Den Driessche, Julian Schrittwieser, Ioannis Antonoglou, Veda Panneershelvam, Marc Lanc- tot, et al. Mastering the game of Go with deep neural networks and tree search. Nature, 529 (7587):484–489, 2016.
+[10] Vinyals, O., Ewalds, T., Bartunov, S., Georgiev, P., Vezhnevets, A. S., Yeo, M.,  Tsing, R. (2017). StarCraft II: A New Challenge for Reinforcement Learning. https://doi.org/https://deepmind.com/documents/110/sc2le.pdf
+[11] Mnih, Volodymyr, Kavukcuoglu, Koray, Silver, David, Graves, Alex, Antonoglou, Ioannis, Wierstra, Daan, and Riedmiller, Martin. Playing atari with deep reinforcement learning. In NIPS Deep Learning Workshop. 2013.
+[12] Volodymyr Mnih, Adrià Puigdomènech Badia, Mehdi Mirza, Alex Graves, Timothy P. Lillicrap, Tim Harley, David Silver, Koray Kavukcuoglu. Asynchronous Methods for Deep Reinforcement Learning. ICML 2016.
+[13] Basel Alghanem, Keerthana P G. Asynchronous Advantage Actor-Critic Agent for Starcraft II. arXiv:1807.08217
 ### TUTORIALS:
-	[15] Advanced Deep Learning & Reinforcement Learning.  https://www.youtube.com/playlist?list=PLqYmG7hTraZDNJre23vqCGIVpfZ_K2RZs
-	[16] Deep RL Bootcamp 2017. https://www.youtube.com/playlist?list=PLAdk-EyP1ND8MqJEJnSvaoUShrAWYe51U
+[15] Advanced Deep Learning & Reinforcement Learning.  https://www.youtube.com/playlist?list=PLqYmG7hTraZDNJre23vqCGIVpfZ_K2RZs
+[16] Deep RL Bootcamp 2017. https://www.youtube.com/playlist?list=PLAdk-EyP1ND8MqJEJnSvaoUShrAWYe51U
 ### OPEN SOURCE:
-	[17] Baselines. https://github.com/openai/baselines
-	[18] Baselines.deepq.experiments. https://github.com/openai/baselines/tree/master/baselines/deepq/experiments
-	[19] Steven Brown. Build a Zerg Bot with PySC2 2.0. https://itnext.io/build-a-zerg-bot-with-pysc2-2-0-295375d2f58e
-	[20] Chris Hoyean Song. StarCraft II RL Tutorial 1 http://chris-chris.ai/2017/08/30/pysc2-tutorial1/
+[17] Baselines. https://github.com/openai/baselines
+[18] Baselines.deepq.experiments. https://github.com/openai/baselines/tree/master/baselines/deepq/experiments
+[19] Steven Brown. Build a Zerg Bot with PySC2 2.0. https://itnext.io/build-a-zerg-bot-with-pysc2-2-0-295375d2f58e
+[20] Chris Hoyean Song. StarCraft II RL Tutorial 1 http://chris-chris.ai/2017/08/30/pysc2-tutorial1/
 ### PROGRAMS IMPLEMENTED:
-	(4) terran_bot.py
+(4) terran_bot.py
 Scripted bot that uses "Simple64" map and plays against Zerg race. Based on [19]
-	(5) terran_bot_cms.py
+(5) terran_bot_cms.py
 Scripted bot that uses " CollectMineralShards" map and plays against Zerg race.
-	(6) terran_bot_dr.py
+(6) terran_bot_dr.py
 Scripted bot that uses " DefeatRoaches" map and plays against Zerg race.
-	(7) terran_bot_mtb.py
+(7) terran_bot_mtb.py
 Scripted bot that uses "MoveToBeacon" map and plays against Zerg race.
-	 (8) train_mineral_shards.py
+(8) train_mineral_shards.py
 Program that trains two marines in the “CollectMineralShards” map to collect as much shards as possible.  based on [18] and [20], which were not working in the original repository.  
-	(9) deepq_mineral_shards.py
+(9) deepq_mineral_shards.py
 Program that trains a using a program based on [18] and [20]
 ## STRATEGY FOR THE IMPLEMENTATION:
 The firs step to tackle the problem was familiarizing with the StarCraftII domain (learn how to play the game). I learnt that:
-	The game has three types of race. Each race has its own units and each unit its own set of possible actions
-	Is a multiagent problem, where agents are competing.
-	It is an imperfect information game
-	The action space is vast and diverse with many actions available
-	Delayed reward knowledge
+- The game has three types of race. Each race has its own units and each unit its own set of possible actions
+- Is a multiagent problem, where agents are competing.
+- It is an imperfect information game
+- The action space is vast and diverse with many actions available
+-	Delayed reward knowledge
+
 The second step was familiarizing with the pysc2 Reinforcement Learning environment. To do so, I created some scripted bots. Using the minimaps and complete ones. Minimaps are maps specially developed for ML experimentation, which will be used later.
+
 I can summarize the pysc2 environment with the following picture:
  
 The most important blocks are Observe and Act. In observe we have two options: the first is to use the RGB input as in Atari, and the second the feature layers. In this project I’m using feature layers. The knowledge of the variables and their semantics ( the meaning of each layer in a tensor) is crucial for debugging purposes. The Act block will allow allow the agent to a selected action. 
 The third step was providing reinforcement learning algorithms to the bots. In this case I trained a dqn.  
-
-
 
 # StartCraft II Reinforcement Learning Examples
 
