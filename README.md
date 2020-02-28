@@ -106,12 +106,12 @@ The firs step to tackle the problem was familiarizing with the StarCraftII domai
 The second step was familiarizing with the pysc2 Reinforcement Learning environment. To do so, I created some scripted bots. Using the minimaps and complete ones. Minimaps are maps specially developed for ML experimentation, which will be used later.
 
 I can summarize the pysc2 environment with the following picture:
-
+![RL agent](rl_agent.png)
  
 The most important blocks are Observe and Act. In observe we have two options: the first is to use the RGB input as in Atari, and the second the feature layers. In this project I’m using feature layers. The knowledge of the variables and their semantics ( the meaning of each layer in a tensor) is crucial for debugging purposes. The Act block will allow allow the agent to a selected action. 
 The third step was providing reinforcement learning algorithms to the bots. In this case I trained a dqn.  
-
-# ORIGINAL README.MD StartCraft II Reinforcement Learning Examples
+ 
+# StartCraft II Reinforcement Learning Examples
 
 This example program was built on 
 - pysc2 (Deepmind) [https://github.com/deepmind/pysc2]
@@ -169,40 +169,5 @@ and extract them to your `StarcraftII/Maps/` directory.
 ## 4. Train it!
 
 ```shell
-$ python train_mineral_shards.py --algorithm=a2c
+$ python train_mineral_shards.py --algorithm=deepq
 ```
-
-## 5. Enjoy it!
-
-```shell
-$ python enjoy_mineral_shards.py
-```
-
-## 4-1. Train it with DQN
-
-```shell
-$ python train_mineral_shards.py --algorithm=deepq --prioritized=True --dueling=True --timesteps=2000000 --exploration_fraction=0.2
-```
-
-
-## 4-2. Train it with A2C(A3C)
-
-```shell
-$ python train_mineral_shards.py --algorithm=a2c --num_agents=2 --num_scripts=2 --timesteps=2000000
-```
-
-
-|                      | Description                                     | Default                         | Parameter Type |
-|----------------------|-------------------------------------------------|---------------------------------|----------------|
-| map                  | Gym Environment                                 | CollectMineralShards            | string         |
-| log                  | logging type  : tensorboard, stdout             | tensorboard                     | string         |
-| algorithm            | Currently, support 2 algorithms  : deepq, a2c   | a2c                             | string         |
-| timesteps            | Total training steps                            | 2000000                         | int            |
-| exploration_fraction | exploration fraction                            | 0.5                             | float          |
-| prioritized          | Whether using prioritized replay for DQN        | False                           | boolean        |
-| dueling              | Whether using dueling network for DQN           | False                           | boolean        |
-| lr                   | learning rate (if 0 set random e-5 ~ e-3)       | 0.0005                          | float          |
-| num_agents           | number of agents for A2C                        | 4                               | int            |
-| num_scripts          | number of scripted agents for A2C               | 4                               | int            |
-| nsteps               | number of steps for update policy               | 20                              | int            |
-
