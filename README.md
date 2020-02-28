@@ -46,7 +46,7 @@ The theory available for reinforcement learning had constrained to applications 
 
 One of the earliest successful applications of deep learning to reinforcement learning was in the Atari game. The architecture designed was named Deep Q Network (DQN)<sup>6</sup> . It used a convolutional neural network of two convolutional layers and two fully connected layers. We can consider DQN as an evolution of NFQ in the sense that it used experience replay to address the correlation between successive updates. However, DQN is online, it samples a random minibatch of transitions from the replay buffer and preforms gradient descent to update the Q network. The use of the reply experience made DQN off-policy. DQN also addressed the correlation between the value and the target by using a separated network (older set of weights) to compute the targets that is updated every x number of iterations; therefore, the target function does not change too quickly. The results of DQN were impressive, it outperformed human payers in 29 of 49 games using the same architecture and hyperparameters. It only had to retrain for a new neural net for each game. Despite the unprecedented success, DQN had some drawbacks: its use of memory and the requirement of off-policy learning. The asynchronous advantage actor-critic (A3C)<sup>11</sup> method surpasses these drawbacks by asynchronously executing multiple agents in parallel, on multiple instances of the environment threads of the same CPU. The agents share a model which asynchronously updated in the shared memory, and they might employ different exploration policies. AC3 tis less expensive to train that DQN, but it might be less stable too.  
 
-As dataset such ImageNet allowed the flourishment of techniques for deep neural networks, challenging reinforcement learning environments are allowing the development of new reinforcement learning methods10. Some examples of environment are Atari, Go, Dota and StarCraft II. For this course, we selected the StarCraft II RL environment. StarCraft is a real time strategy game (RTS) considered a highly complex domain. Depending on the map (challenge) we use, the units available and resources, the player decides what actions to take. See the Strategy for the Implementation section or more details.
+As dataset such ImageNet allowed the flourishment of techniques for deep neural networks, challenging reinforcement learning environments are allowing the development of new reinforcement learning methods<sup>10</sup>. Some examples of environment are Atari, Go, Dota and StarCraft II. For this course, we selected the StarCraft II RL environment. StarCraft is a real time strategy game (RTS) considered a highly complex domain. Depending on the map (challenge) we use, the units available and resources, the player decides what actions to take. See the Strategy for the Implementation section or more details.
 
 ### RECOMMENDED READINGS:
 [6] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Bellemare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, et al. Human-level control through deep reinforcement learning. Nature, 518(7540):529–533, 2015.
@@ -94,6 +94,7 @@ Program that trains two marines in the “CollectMineralShards” map to collect
 
 (9) deepq_mineral_shards.py
 Program that trains a using a program based on [18] and [20]
+
 ## STRATEGY FOR THE IMPLEMENTATION:
 The firs step to tackle the problem was familiarizing with the StarCraftII domain (learn how to play the game). I learnt that:
 - The game has three types of race. Each race has its own units and each unit its own set of possible actions
@@ -109,7 +110,7 @@ I can summarize the pysc2 environment with the following picture:
 The most important blocks are Observe and Act. In observe we have two options: the first is to use the RGB input as in Atari, and the second the feature layers. In this project I’m using feature layers. The knowledge of the variables and their semantics ( the meaning of each layer in a tensor) is crucial for debugging purposes. The Act block will allow allow the agent to a selected action. 
 The third step was providing reinforcement learning algorithms to the bots. In this case I trained a dqn.  
 
-# StartCraft II Reinforcement Learning Examples
+# ORIGINAL README.MD StartCraft II Reinforcement Learning Examples
 
 This example program was built on 
 - pysc2 (Deepmind) [https://github.com/deepmind/pysc2]
